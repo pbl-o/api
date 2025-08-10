@@ -1,7 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html{
+     font-family: "Google Sans Code", monospace;
 }
 
 .container {
@@ -56,8 +62,13 @@
   color: white;
   font-weight: 600;
   font-size: 1rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 1rem;
 
 }
+
 canvas {
   border-radius: 5px;
 }
@@ -108,18 +119,21 @@ input {
 }
 
 .warning{
-    width: 100%;
     height: auto;
+    margin: 3rem;
     padding: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 4rem;
+   
+   
 }
 
-.warning img{
-    width: 100%;
+.warning i{
+  font-size: 3rem;
+  padding: 2rem;
 
 }
 
