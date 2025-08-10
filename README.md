@@ -1,5 +1,5 @@
 
-# Conversos de monedas
+# Conversor de monedas
 
 ### Pablo E. Díaz A.
 

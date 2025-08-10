@@ -1,3 +1,5 @@
+
+
 try {
      //alert(mensajeInicial); /* otro error */
 
@@ -9,12 +11,13 @@ try {
   const resultDiv = document.getElementById("result"); // Div de resultado bajo el botón 
   const chartTitle = document.getElementById("graphic-title"); // Título extra del gráfico
 
-  let mensajeInicial = `Esto es un conversor de moendas, se conecta con la API ${apiURL}.
+
+  function intro(){
+      let mensajeInicial = `Esto es un conversor de moendas, se conecta con la API ${apiURL}.
    
 Para utilizarla solo debes ingresar una cantidad (en pesos chilenos) en el recuadro indicado, elegir el indicador al cual desease convertir la cantidad y luego apretar el botón, "${btnCalcular.innerText}". Adicionalmente podrás visualizar una gráfica con el flujo de valores de los últimos 10 dias.`
 alert(mensajeInicial)
-
-
+  };
 
   //FETCH
   //fetch data (todo tipo de indicadores)
@@ -39,7 +42,12 @@ alert(mensajeInicial)
     return { data, series };
   };
   
-//////////////////////
+
+
+
+
+
+
 
 
   //renderizar select options argument: labels
@@ -95,6 +103,13 @@ alert(mensajeInicial)
   };
 
 
+
+
+
+
+
+  //PREPARAR GRÁFICOS
+
   const prepareChart = async (curr) => {
     const {series} = await getCurrencySpecificData(curr);
 
@@ -128,7 +143,6 @@ alert(mensajeInicial)
     };
 
 
-
     //En el canvas del HTML, si no hay ya un gráfico, se crea uno, que se almacena en chartIsntance.
     //En caso de que ya haya un gráfico almacenado, la gráfica se desrtuyre -chartInstance.destroy()-
     const myChart = document.getElementById("my-chart");
@@ -140,13 +154,11 @@ alert(mensajeInicial)
 
 
 
-  // se crea una función para inicailizar todo:
+  //Una función para inicailizar todo:
   const initialize = async () => {
     const { labels } = await getCurrencyData();
     renderSelector(labels);
     calculateExchange();
-   
-   
   };
   initialize();
   
