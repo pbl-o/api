@@ -1,0 +1,207 @@
+@import url("https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Google Sans Code", monospace;
+}
+
+.main-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+}
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.app-container {
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  gap: 1rem;
+}
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 60%;
+  height: 25%;
+  padding: 1rem;
+  gap: 0.9rem;
+  border-radius: 5px;
+  background-color: #333;
+  box-shadow: inset 2px 2px 3px #c1c1c1;
+}
+
+/* Grafico */
+.grafica {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  align-self: center;
+  gap: 1rem;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+#graphic-title {
+  color: #333;
+  font-size: 1rem;
+  text-align: center;
+}
+
+canvas {
+  border-radius: 5px;
+}
+
+/* inputs */
+/* label generico */
+
+label {
+  text-align: center;
+  color: #ddd;
+}
+
+/* input clp */
+input {
+  padding: 0.5rem 0;
+  padding-right: 1rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+input::placeholder {
+  text-align: center;
+}
+
+/* selector */
+select,
+option {
+  text-align: left;
+  font-weight: 700;
+  text-transform: capitalize;
+  padding: 0.5rem;
+}
+
+.dummy {
+  font-weight: 500;
+  text-align: center;
+  padding: 0.3rem;
+}
+
+/* botón */
+button {
+  background-color: #000;
+  box-shadow: inset 1px 1px 3px #777;
+  border: none;
+  border-radius: 3px;
+  font-weight: 700;
+  color: #ddd;
+  width: 55%;
+  padding: 0.8rem;
+  align-self: center;
+  transition: all 0.3s ease-in-out;
+}
+.intro {
+  width: 36%;
+  justify-self: center;
+  opacity: .3;
+}
+
+.intro:hover{
+    opacity: 1;
+}
+
+button:hover {
+  filter: invert(100%);
+  cursor: pointer;
+}
+
+/* div con resultado */
+
+#result {
+  width: 100%;
+  align-self: center;
+  height: 30%;
+  padding: 1rem;
+  background-color: #222;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* catch error contenido */
+.warning {
+  height: auto;
+  margin: 3rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+}
+
+.warning i {
+  font-size: 3rem;
+  padding: 2rem;
+}
+
+@media (min-width: 767px) {
+  .grafica {
+    width: 90%;
+  }
+
+  .app {
+    width: 40%;
+  }
+  .warning img {
+    width: 60%;
+  }
+}
+
+@media (min-width: 992px) {
+  .grafica {
+    width: 70%;
+  }
+
+  .app {
+    width: 30%;
+  }
+
+  .warning img {
+    width: 50%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .grafica {
+    width: 50%;
+  }
+
+  .app {
+    width: 20%;
+  }
+
+  .warning img {
+    width: 40%;
+  }
+}
