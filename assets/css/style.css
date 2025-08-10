@@ -10,12 +10,12 @@ html {
   font-family: "Google Sans Code", monospace;
 }
 
-.main-container{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: stretch;
+.main-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
 }
 .container {
   width: 100%;
@@ -119,11 +119,11 @@ button {
 .intro {
   width: 36%;
   justify-self: center;
-  opacity: .3;
+  opacity: 0.3;
 }
 
-.intro:hover{
-    opacity: 1;
+.intro:hover {
+  opacity: 1;
 }
 
 button:hover {

@@ -20,7 +20,6 @@ try {
     const res = await fetch(apiURL);
     const data = await res.json();
 
-
     //No conseguí encontrar un nombre para invocar al objeto por lo que utilicé estos metodos para filtrar sus llaves y valores (para así acceder a los objetos dentro del objeto e igualemnte a los valores de este (codigo, valor))
     const labels = Object.keys(data).filter((_, index) => index >= 3);
     const valores = Object.values(data).filter((_, index) => index >= 3);
@@ -77,7 +76,7 @@ try {
         .toUpperCase()
         .replace("_", " ")}  equivale a ~ ${1 * selectedValue} CLP  `;
 
-        //si el valor ingresado el input es NaN, 0 o null, se despliega el valor de la unidad seleccionada pero se pide ingresar un monto.
+      //si el valor ingresado el input es NaN, 0 o null, se despliega el valor de la unidad seleccionada pero se pide ingresar un monto.
       if (isNaN(clpCurrency) || clpCurrency === 0 || clpCurrency === null) {
         alert("Por favor ingresa un monto válido");
         resultDiv.innerText = standardmsg;
