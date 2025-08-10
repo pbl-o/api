@@ -55,7 +55,7 @@ try {
   // argument: valores
   const calculateExchange = async () => {
     const { valores } = await getCurrencyData(); //se trabajará en init
-    resultDiv.innerHTML = `CLP   <i class="fa-solid fa-arrow-right"></i>    indicador`;
+    resultDiv.innerHTML = `CLP   <i class="fa-solid fa-arrow-right"></i>    Indicador`;
 
     // cosas que pasan al cargar el botón (fetch, calculo y render)
     btnCalcular.addEventListener("click", async () => {
