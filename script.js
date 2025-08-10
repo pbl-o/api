@@ -66,7 +66,7 @@ try {
         return (currencySelector.value = "");
       }
 
-      //Si el valor no es el default se invoca el renderizador de gráfico, que a su vez llama al preload (prapareCahrt) y al fetch especifico
+      //Si el valor no es el default se invoca el renderizador de gráfico que a su vez llama al preload (prapareCahrt) y al fetch especifico
       await renderChart(currencySelector.value);
       const index = valores.findIndex(
         (el) => el.codigo === currencySelector.value
@@ -77,11 +77,12 @@ try {
         .toUpperCase()
         .replace("_", " ")}  equivale a ~ ${1 * selectedValue} CLP  `;
 
-      if (isNaN(clpCurrency) || clpCurrency === 0) {
+        //si el valor ingresado el input es NaN, 0 o null, se despliega el valor de la unidad seleccionada pero se pide ingresar un monto.
+      if (isNaN(clpCurrency) || clpCurrency === 0 || clpCurrency === null) {
         alert("Por favor ingrea un monto válido");
         resultDiv.innerText = standardmsg;
         inputCLP.value = "";
-        return;
+        return (currencySelector.value = "");
       }
 
       const calculo = clpCurrency / selectedValue;
