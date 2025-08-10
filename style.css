@@ -1,0 +1,168 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.app-container {
+  height: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 60%;
+  height: 25%;
+  padding: 1rem;
+  gap: 1.5rem;
+  border-radius: 5px;
+  background-color: #333;
+  box-shadow: inset 2px 2px 3px #c1c1c1;
+}
+.grafica {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  align-self: center;
+  gap: 1rem;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+#graphic-title {
+  color: #333;
+  font-size: 1rem;
+  text-align: center;
+}
+
+#result {
+  width: 100%;
+  align-self: center;
+  height: 30%;
+  padding: 1rem;
+  background-color: #222;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+
+}
+canvas {
+  border-radius: 5px;
+}
+
+
+
+select, option {
+  text-align: left;
+  font-weight: 700;
+  text-transform: capitalize;
+  padding: 0.3rem;
+}
+
+ .dummy{
+    font-weight: 500;
+    text-align: center;
+    padding: 0.3rem;
+}
+ 
+
+
+button {
+  background-color: #000;
+  box-shadow: inset 1px 1px 3px #777;
+  border: none;
+  font-weight: 700;
+  color: #ddd;
+  width: 55%;
+  padding: 0.5rem;
+  align-self: center;
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  filter: invert(100%);
+  cursor: pointer;
+}
+
+input::placeholder {
+  text-align: center;
+}
+
+input {
+  padding: 0.3rem 0;
+  padding-right: 1rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.warning{
+    width: 100%;
+    height: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.warning img{
+    width: 100%;
+
+}
+
+@media (min-width: 767px) {
+  .grafica {
+    width: 90%;
+  }
+
+  .app {
+    width: 40%;
+  }
+  .warning img{
+    width: 60%;
+
+}
+}
+
+@media (min-width: 992px) {
+  .grafica {
+    width: 70%;
+  }
+
+  .app {
+    width: 30%;
+  }
+
+    .warning img{
+    width: 50%;
+
+}
+}
+
+@media (min-width: 1200px) {
+  .grafica {
+    width: 65%;
+  }
+
+  .app {
+    width: 20%;
+  }
+
+    .warning img{
+    width: 40%;
+
+}
+}
