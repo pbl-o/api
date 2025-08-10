@@ -1,33 +1,29 @@
-
-
 try {
-     //alert(mensajeInicial); /* otro error */
+  //alert(mensajeInicial); /* otro error */
 
-//Elementos del DOM y links
-  const apiURL = "https://mindicador.cl/api" //url API
+  //Elementos del DOM y links
+  const apiURL = "https://mindicador.cl/api"; //url API
   const inputCLP = document.getElementById("input-clp"); // Input (para ingresar valor e CLP)
   const currencySelector = document.getElementById("curr-sel"); // Selector de indicadores y divisas
   const btnCalcular = document.getElementById("btn-calcular"); // Botón "BUSCAR"
-  const resultDiv = document.getElementById("result"); // Div de resultado bajo el botón 
+  const resultDiv = document.getElementById("result"); // Div de resultado bajo el botón
   const chartTitle = document.getElementById("graphic-title"); // Título extra del gráfico
 
-
-  function intro(){
-      let mensajeInicial = `Esto es un conversor de moendas, se conecta con la API ${apiURL}.
-   
-Para utilizarla solo debes ingresar una cantidad (en pesos chilenos) en el recuadro indicado, elegir el indicador al cual desease convertir la cantidad y luego apretar el botón, "${btnCalcular.innerText}". Adicionalmente podrás visualizar una gráfica con el flujo de valores de los últimos 10 dias.`
-alert(mensajeInicial)
-  };
+  function intro() {
+    let mensajeInicial = `Esto es un conversor de moendas, conectada a ${apiURL}. Para usarla ingresa una monto en pesos (CLP) en dond se indica, elige el indicador para convertir la cantidad y luego aprieta el botón "${btnCalcular.innerText}". Adicionalmente podrás visualizar indicadores y valores de los últimos 10 dias. Si solo quieres ver estadisticas o el valor unitario de un indicador, puede apretar el botón directamente sin ingresar un monto.`;
+    alert(mensajeInicial);
+  }
 
   //FETCH
   //fetch data (todo tipo de indicadores)
   const getCurrencyData = async () => {
     const res = await fetch(apiURL);
     const data = await res.json();
+    console.log(data);
 
     //No conseguí encontrar un nombre para invocar al objeto por lo que utilicé estos metodos para filtrar sus llaves y valores (para así acceder a los objetos dentro del objeto e igualemnte a los valores de este (codigo, valor))
-    const labels = Object.keys(data).filter((_, index) => index > 3);
-    const valores = Object.values(data).filter((_, index) => index > 3);
+    const labels = Object.keys(data).filter((_, index) => index >= 3);
+    const valores = Object.values(data).filter((_, index) => index >= 3);
 
     return { data, labels, valores };
   };
@@ -39,38 +35,35 @@ alert(mensajeInicial)
     const data = await res.json();
     const series = data.serie;
 
+    console.log(series);
+
     return { data, series };
   };
-  
-
-
-
-
-
-
-
 
   //renderizar select options argument: labels
   const renderSelector = async (labels) => {
     let template = "";
-     template += `<option disabled selected class="dummy" value="">--Elige un indicador--</option>`
+    template = `<option disabled selected class="dummy" value="">--Elige un indicador--</option>`;
     labels.forEach((item) => {
-      template += `<option value="${item}">${item.replaceAll("_", " ")}</option>`;
+      template += `<option value="${item}">${item.replaceAll(
+        "_",
+        " "
+      )}</option>`;
     });
     currencySelector.innerHTML = template;
   };
 
   // argument: valores
   const calculateExchange = async () => {
-    const {valores} = await getCurrencyData(); //se trabajará en init
-     resultDiv.innerHTML = `CLP   <i class="fa-solid fa-arrow-right"></i>    indicador`
+    const { valores } = await getCurrencyData(); //se trabajará en init
+    resultDiv.innerHTML = `CLP   <i class="fa-solid fa-arrow-right"></i>    indicador`;
 
     // cosas que pasan al cargar el botón (fetch, calculo y render)
     btnCalcular.addEventListener("click", async () => {
       //Si el usuario hace click en el botón --eligue un indicador--, se avisa del error y se devuelve el mismo valor (vacío)
-      if(!currencySelector.value){
-        alert('Selecciona un indicador porfavor');
-        return currencySelector.value = '';
+      if (!currencySelector.value) {
+        alert("Selecciona un indicador porfavor");
+        return (currencySelector.value = "");
       }
 
       //Si el valor no es el default se invoca el renderizador de gráfico, que a su vez llama al preload (prapareCahrt) y al fetch especifico
@@ -102,22 +95,26 @@ alert(mensajeInicial)
     });
   };
 
-
-
-
-
-
-
   //PREPARAR GRÁFICOS
 
   const prepareChart = async (curr) => {
-    const {series} = await getCurrencySpecificData(curr);
+    const { series } = await getCurrencySpecificData(curr);
 
-    const labels = series.map((item) => item.fecha.split("T")[0]).filter((_, index) =>  index <= 10).reverse();
+    const labels = series
+      .map((item) => item.fecha.split("T")[0])
+      .filter((_, index) => index <= 10)
+      .reverse();
     const data = series.map((item) => item.valor);
-  
+
     //Chart Title
-    chartTitle.innerHTML = `Indicador : ${(currencySelector.value.slice(0, 1).toUpperCase()).concat(currencySelector.value.slice(1, currencySelector.value.length ).replace("_", " "))}`;
+    chartTitle.innerHTML = `Indicador : ${currencySelector.value
+      .slice(0, 1)
+      .toUpperCase()
+      .concat(
+        currencySelector.value
+          .slice(1, currencySelector.value.length)
+          .replace("_", " ")
+      )}`;
 
     // elementos del chart (etiquetas, color de linea y datos
     const datasets = [
@@ -131,10 +128,10 @@ alert(mensajeInicial)
     return { labels, datasets };
   };
 
-//Por lo que estuve probando esta varaible almacena isntancia de gráficos para evitar sobreescritura.
+  //Por lo que estuve probando esta varaible almacena isntancia de gráficos para evitar sobreescritura.
   let chartInstance = null;
 
-  //Decidí renderizar el gráfico en la medida que se elija un indicador aunque no haya un input en CLP para mostrar el valor en pesos de una unidad del indicador, creo que hace la aplicación menos hostil. 
+  //Decidí renderizar el gráfico en la medida que se elija un indicador aunque no haya un input en CLP para mostrar el valor en pesos de una unidad del indicador, creo que hace la aplicación menos hostil.
   const renderChart = async (curr) => {
     const data = await prepareChart(curr);
     const config = {
@@ -142,17 +139,13 @@ alert(mensajeInicial)
       data,
     };
 
-
     //En el canvas del HTML, si no hay ya un gráfico, se crea uno, que se almacena en chartIsntance.
     //En caso de que ya haya un gráfico almacenado, la gráfica se desrtuyre -chartInstance.destroy()-
     const myChart = document.getElementById("my-chart");
     myChart.style.backgroundColor = "white";
-    if(chartInstance) chartInstance.destroy();
+    if (chartInstance) chartInstance.destroy();
     chartInstance = new Chart(myChart, config);
   };
-
-
-
 
   //Una función para inicailizar todo:
   const initialize = async () => {
@@ -161,15 +154,13 @@ alert(mensajeInicial)
     calculateExchange();
   };
   initialize();
-  
 
   // Error Test: Activar la función de abajo.
- //thisIsNotAFunctions();  /* <- Esta*/
-
+  //thisIsNotAFunctions();  /* <- Esta*/
 
   // Se renderiza un alert un mensaje simple para advertir al usuario.
 } catch (error) {
-  const container = document.querySelector('.main-container')
+  const container = document.querySelector(".main-container");
   alert("There is something wrong");
   console.log(error);
 
@@ -179,6 +170,5 @@ alert(mensajeInicial)
     <p>Estamos trabajando para solucionarlo</p>
     <i class="fa-solid fa-screwdriver-wrench"></i>
     </div>
-  `
-  
+  `;
 }
